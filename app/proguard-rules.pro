@@ -20,5 +20,6 @@
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
 
--keep class com.dm.bomber.services.remote.RemoteRequest { *; }
--keep class com.dm.bomber.services.remote.RemoteService { *; }
+#-keep class com.dm.bomber.services.remote.RemoteRequest { *; }
+#-keep class com.dm.bomber.services.remote.RemoteService { *; }
+-keep class com.dm.bomber.* { *; }

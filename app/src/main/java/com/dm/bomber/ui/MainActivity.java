@@ -34,7 +34,6 @@ import com.dm.bomber.BuildVars;
 import com.dm.bomber.R;
 import com.dm.bomber.databinding.ActivityMainBinding;
 import com.dm.bomber.ui.adapters.CountryCodeAdapter;
-import com.dm.bomber.ui.dialog.AdvertisingDialog;
 import com.dm.bomber.ui.dialog.RepositoriesDialog;
 import com.dm.bomber.ui.dialog.SettingsDialog;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
@@ -111,40 +110,6 @@ public class MainActivity extends AppCompatActivity {
                 binding.workScreen.setVisibility(View.GONE);
             }
         });
-
-        model.getUpdates().observe(this, dataSnapshot -> {
-            if (dataSnapshot == null) return;
-            Integer versionCode = dataSnapshot.get(VERSION_CODE_KEY, Integer.class);
-
-            if (versionCode != null && versionCode > BuildConfig.VERSION_CODE) {
-                Snackbar.make(binding.getRoot(), R.string.update_available, Snackbar.LENGTH_INDEFINITE)
-                        .setAction(R.string.download, v -> {
-                            String key = "description-" + Locale.getDefault().getLanguage();
-
-                            if (!dataSnapshot.contains(key))
-                                key = "description";
-
-                            CharSequence description = Html.fromHtml(dataSnapshot.getString(key));
-
-                            new MaterialAlertDialogBuilder(MainActivity.this)
-                                    .setIcon(R.drawable.ic_baseline_update_24)
-                                    .setTitle(R.string.update_available)
-                                    .setMessage(description)
-                                    .setPositiveButton(R.string.download, (dialog, which) -> {
-                                        if (Boolean.TRUE.equals(dataSnapshot.getBoolean(ONLY_DIRECT_KEY)) ||
-                                                (Boolean.TRUE.equals(dataSnapshot.getBoolean(ALLOW_DIRECT_KEY)) && !isTelegramInstalled()))
-                                            model.downloadUpdate(dataSnapshot.getString(DIRECT_URL_KEY));
-                                        else
-                                            startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(dataSnapshot.getString(TELEGRAM_URL_KEY))));
-                                    })
-                                    .show();
-                        }).show();
-            }
-
-            model.cancelUpdates();
-        });
-
-        model.getAdvertisingAvailable().observe(this, available -> advertisingAvailable = available);
 
         InputMethodManager input = (InputMethodManager) getSystemService(INPUT_METHOD_SERVICE);
 
@@ -277,17 +242,11 @@ public class MainActivity extends AppCompatActivity {
                     model.startAttack(BuildVars.COUNTRY_CODES[binding.phoneCode.getSelectedItemPosition()], phoneNumber,
                             repeats.isEmpty() ? 1 : Integer.parseInt(repeats));
 
-                    model.getAdvertisingTrigger().removeObserver(this);
                 }
             };
 
-            if (advertisingAvailable) {
-                new AdvertisingDialog().show(getSupportFragmentManager(), null);
-                model.setAdvertisingTrigger(false);
-                model.getAdvertisingTrigger().observeForever(observer);
-            } else {
-                observer.onChanged(true);
-            }
+            
+            observer.onChanged(true);
         });
 
         binding.closeAttack.setOnClickListener(view -> model.cancelCurrentWork());

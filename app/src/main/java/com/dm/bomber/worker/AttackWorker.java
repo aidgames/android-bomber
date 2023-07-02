@@ -31,7 +31,6 @@ import com.dm.bomber.ui.MainActivity;
 import com.dm.bomber.ui.MainRepository;
 import com.dm.bomber.ui.MainViewModel;
 import com.dm.bomber.ui.Repository;
-import com.google.firebase.analytics.FirebaseAnalytics;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -150,9 +149,6 @@ public class AttackWorker extends Worker {
         params.putBoolean("proxy_enabled", getInputData().getBoolean(KEY_PROXY_ENABLED, false));
         params.putInt("proxy_count", proxies.size());
         params.putInt("services_count", usableServices.size());
-
-        FirebaseAnalytics.getInstance(getApplicationContext())
-                .logEvent("attack", params);
 
         Log.i(TAG, "Starting attack on +" + phone);
 
