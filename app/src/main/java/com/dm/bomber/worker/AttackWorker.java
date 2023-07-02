@@ -54,7 +54,7 @@ public class AttackWorker extends Worker {
 
     private static final String TAG = "Attack";
 
-    private static final String USER_AGENT = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/103.0.5060.53 Safari/537.36 Edg/103.0.1264.37";
+    private static final String USER_AGENT = "Mozilla/5.0 (Linux; Android 6.0.1; SM-G928T Build/MMB29K; wv) AppleWebKit/537.36 (KHTML, like Gecko) Version/4.0 Chrome/81.0.4044.117 Mobile Safari/537.36 [FB_IAB/FB4A;FBAV/268.1.0.54.121;]";
 
     public static final String KEY_COUNTRY_CODE = "country_code";
     public static final String KEY_PHONE = "phone";
