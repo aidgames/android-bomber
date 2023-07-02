@@ -20,11 +20,6 @@
         style="@style/ToggleTile"
         android:drawableTop="@drawable/ic_baseline_contrast_24" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/donate_tile"
-        style="@style/ActionTile"
-        app:icon="@drawable/ic_baseline_coffee_24" />
-
     <ToggleButton
         android:id="@+id/proxy_tile"
         style="@style/ToggleTile"
@@ -40,7 +35,7 @@
         android:id="@+id/flow"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        app:constraint_referenced_ids="theme_tile,proxy_tile,donate_tile,source_code_tile"
+        app:constraint_referenced_ids="theme_tile,proxy_tile,source_code_tile"
         app:flow_horizontalGap="8dp"
         app:flow_maxElementsWrap="4"
         app:flow_verticalGap="8dp"

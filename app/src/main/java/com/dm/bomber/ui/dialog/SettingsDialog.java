@@ -96,11 +96,9 @@ public class SettingsDialog extends BottomSheetDialogFragment {
         });
 
         binding.sourceCodeTile.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(BuildVars.SOURCECODE_URL))));
-        binding.donateTile.setOnClickListener(view -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(BuildVars.DONATE_URL))));
 
         binding.servicesCard.setOnClickListener(view -> new RepositoriesDialog().show(getParentFragmentManager(), null));
 
-        TooltipCompat.setTooltipText(binding.donateTile, getString(R.string.donate));
         TooltipCompat.setTooltipText(binding.proxyTile, getString(R.string.proxy));
         TooltipCompat.setTooltipText(binding.sourceCodeTile, getString(R.string.source_code));
 

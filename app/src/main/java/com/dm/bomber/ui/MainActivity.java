@@ -290,11 +290,6 @@ public class MainActivity extends AppCompatActivity {
         binding.settings.setOnClickListener(view -> new SettingsDialog().show(getSupportFragmentManager(), null));
         binding.servicesCount.setOnClickListener(view -> new RepositoriesDialog().show(getSupportFragmentManager(), null));
 
-        View.OnClickListener telegram = (view) -> startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(BuildVars.TELEGRAM_URL)));
-
-        binding.telegramUrl.setOnClickListener(telegram);
-        binding.telegramIcon.setOnClickListener(telegram);
-
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
             registerForActivityResult(new ActivityResultContracts.RequestPermission(), result -> {
                 if (!result) {
