@@ -213,6 +213,8 @@ public class MainActivity extends AppCompatActivity {
                 int repeats = Integer.parseInt(value);
                 if (repeats <= BuildVars.MAX_REPEATS_COUNT && value.length() <= BuildVars.REPEATS_MAX_LENGTH)
                     return null;
+                else
+                    binding.repeats.setText(Integer.toString(BuildVars.MAX_REPEATS_COUNT))
             } catch (NumberFormatException e) {
                 e.printStackTrace();
             }

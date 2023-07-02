@@ -16,7 +16,6 @@ import com.dm.bomber.BuildVars;
 import com.dm.bomber.R;
 import com.dm.bomber.services.MainServices;
 import com.dm.bomber.worker.AttackWorker;
-import com.dm.bomber.worker.DownloadWorker;
 
 import java.util.Arrays;
 import java.util.Collections;
@@ -223,22 +222,6 @@ public class MainViewModel extends ViewModel {
         return workStatus;
     }
 
-    public void downloadUpdate(String url) {
-        OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(DownloadWorker.class)
-                .addTag(UPDATE)
-                .setInputData(new Data.Builder()
-                        .putString(DownloadWorker.URL, url)
-                        .build())
-                .setConstraints(new Constraints.Builder()
-                        .setRequiredNetworkType(NetworkType.CONNECTED)
-                        .build())
-                .build();
-
-        progress.setValue(new Progress(R.drawable.ic_baseline_download_24, R.string.update));
-        pushCurrentWork(workRequest);
-
-        workManager.enqueue(workRequest);
-    }
 
     public void scheduleAttack(String countryCode, String phoneNumber, int repeats, long date, long current) {
         Data inputData = new Data.Builder()
